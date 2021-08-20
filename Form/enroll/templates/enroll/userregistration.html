@@ -4,9 +4,11 @@
 <title>Page Title</title>
 </head>
 <body>
-<table>
- {{form}}
-</table>
+<form action = "" method = "POST">
+{% csrf_token %}
+ {{form.as_p}}
+ <input type = "submit"  value = "Submit"> 
+</form>
    
 </body>
 </html>
