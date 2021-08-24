@@ -2,12 +2,52 @@
 {%block content%}
 <div class="row">
 <div class="col-sm-4">
-<h4> Add new Student Student </h4>
+<h4 class = "text-center alert alert-info" > Add new Student Student </h4>
 <form action"" method = "POST">
 {% csrf_token %}
 {{form.as_p}}
 <input type="submit" class="btn btn-success" value="add">
 </form>
 </div>
+
+<div class="col-sm-7 offset-1">
+<h4 class = "text-center alert alert-info" > Show Student 
+Information </h4>
+
+{% if stu %}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Password</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for st in stu %}
+    <tr>
+      <th scope="row">{{st.id}}</th>
+      <td>{{st.name}}</td>
+      <td>{{st.email}}</td>
+      <td>{{st.password}}</td>
+      <td>
+      <a href="#" class = "btn btn-warning btn-sm"> Eidit </a>
+     <form action = "{% url 'deletedata' st.id %}" method = "post" class="d-inline">
+     {% csrf_token %}
+     <input type = "submit" class = "btn btn-danger" 
+     value = "Delete">
+     </form>
+      </td>
+    </tr>
+     {% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+<h4 class="text-center alert alert-warning" > No Records </h4>
+
+{% endif %}
+
 </div> 
 {% endblock content%}
